@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  webserver_service:
+    container_name: '${APP_HOST}'
+    hostname: '${APP_HOST}'
+    build:
+      context: .
+      dockerfile: Dockerfile      
+      args:
+        USERNAME: ${USER?Please set USER in .env file}
+        USERID: ${USERID?Please set USERID in .env file}
+    tty: true
+    restart: always
+    networks:
+      application_internal_network:
+        ipv4_address: '${DOCKER_WEBSERVER_IPV4}'
+    volumes:
+      - './src:${DOCKER_DOCUMENT_ROOT}'
+
+networks:
+  application_internal_network:
+    name: '${DOCKER_NETWORK_NAME}'
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: '${DOCKER_NETWORK_SUBNET}'
