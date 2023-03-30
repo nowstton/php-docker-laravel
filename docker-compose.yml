@@ -1,6 +1,20 @@
 version: '3.8'
 
 services:
+  pgsql_service:
+    image: postgres:15.2-alpine
+    environment:
+      - POSTGRES_USER=${DB_USERNAME?Please set DB_USERNAME in .env file}
+      - POSTGRES_PASSWORD=${DB_PASSWORD?Please set DB_PASSWORD in
+        .env file}
+      - POSTGRES_DB=${DB_DATABASE?Please set DB_DATABASE in .env file}
+      - POSTGRES_PORT=${DB_PORT?Please set DB_PORT in .env file}
+    restart: on-failure
+    volumes:
+      - .docker/storage/pgsql/:/var/lib/postgresql/data/
+    networks:
+      - application_internal_network
+
   webserver_service:
     container_name: '${APP_HOST}'
     hostname: '${APP_HOST}'
@@ -11,6 +25,8 @@ services:
         USERNAME: ${USER?Please set USER in .env file}
         USERID: ${USERID?Please set USERID in .env file}
     tty: true
+    depends_on:
+      - pgsql_service
     restart: always
     networks:
       application_internal_network:

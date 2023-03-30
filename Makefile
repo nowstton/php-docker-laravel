@@ -42,6 +42,12 @@ serve:
 down:
 	@./.docker/scripts/docker-compose-cmd.sh down --remove-orphans
 
+ps:
+	@./.docker/scripts/docker-compose-cmd.sh ps
+
+watch:
+	@./.docker/scripts/docker-compose-cmd.sh logs -f
+
 rebuild:
 	@make down
 	@./.docker/scripts/docker-compose-cmd.sh build --no-cache
