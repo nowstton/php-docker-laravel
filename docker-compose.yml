@@ -16,7 +16,7 @@ services:
       application_internal_network:
         ipv4_address: '${DOCKER_WEBSERVER_IPV4}'
     volumes:
-      - './src:${DOCKER_DOCUMENT_ROOT}'
+      - '.:${DOCKER_DOCUMENT_ROOT}'
 
 networks:
   application_internal_network:

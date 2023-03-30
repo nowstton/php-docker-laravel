@@ -1,11 +1,20 @@
 # git
 !/**/.gitkeep
 
-# Package manager
+# Laravel
 **/vendor/**
 **/node_modules/**
+/public/build
+/public/hot
+/public/storage
 **/npm-debug.log
 **/yarn-error.log
+**/auth.json
+Homestead.json
+Homestead.yaml
+/storage/*.key
+/.phpunit.cache
+.phpunit.result.cache
 
 # IDEs
 **/.idea/**
@@ -13,7 +22,10 @@
 
 # Environmnent
 **/.env
-**/.env
+**/.env.backup
+**/.env.production
 
 # Files
 docker-compose.override.yml
+
+
